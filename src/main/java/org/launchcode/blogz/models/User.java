@@ -13,16 +13,18 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Entity
-@Table(name = "user")
+@Entity //this is an object I want you to store in database
+@Table(name = "user")//store it in a table
 public class User extends AbstractEntity {
 
 	private String username;
 	private String pwHash;
 	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
+	// all posts by a given user
 	private List<Post> posts;
 	
+	//hibernate required no args// also hibernate requires seters
 	public User() {}
 	
 	public User(String username, String password) {
@@ -49,8 +51,8 @@ public class User extends AbstractEntity {
 		this.pwHash = pwHash;
 	}
 	
-	@NotNull
-    @Column(name = "username", unique = true)
+	@NotNull//cannot be empty
+    @Column(name = "username", unique = true)//store this property in a column
 	public String getUsername() {
 		return username;
 	}
@@ -63,7 +65,8 @@ public class User extends AbstractEntity {
 	private void setUsername(String username) {
 		this.username = username;
 	}
-	
+	//checks that the password matches
+	//need a user object to do this user.isMatchingPassword(...)
 	public boolean isMatchingPassword(String password) {
 		return encoder.matches(password, pwHash);
 	}
@@ -84,8 +87,8 @@ public class User extends AbstractEntity {
 		posts.add(post);
 	}
 	
-	@OneToMany
-    @JoinColumn(name = "author_uid")
+	@OneToMany//@joinColumn joins the table storing users with the table storing posts
+    @JoinColumn(name = "author_uid")//go to the posts column and get me all of the posts that match this particular user
     public List<Post> getPosts() {
         return posts;
     }

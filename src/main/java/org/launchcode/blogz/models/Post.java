@@ -35,7 +35,7 @@ public class Post extends AbstractEntity {
 	}
 	
 	
-	@NotNull
+	//@NotNull
     @Column(name = "title")
 	public String getTitle() {
 		return title;
@@ -68,7 +68,7 @@ public class Post extends AbstractEntity {
 	}
 	
 	@NotNull
-	@OrderColumn
+	@OrderColumn//it orders posts by date when it pulls them out of the database
 	@Column(name = "created")
 	public Date getCreated() {
 		return created;

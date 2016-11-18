@@ -9,14 +9,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class WebApplicationConfig extends WebMvcConfigurerAdapter {
 
     // Create managed bean to allow autowiring
+	
+	
     @Bean
     public AuthenticationInterceptor authenticationInterceptor() {
-        return new AuthenticationInterceptor();
+        return new AuthenticationInterceptor();//used to determine whether or not a user is logged in
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor( authenticationInterceptor() );
+        registry.addInterceptor( authenticationInterceptor() );//interceptor is added to registry
     }
 
 }
